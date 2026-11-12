@@ -57,9 +57,9 @@ Node types:
 | AI agent | No | A coding agent, a model launched by a script |
 | Person | No | The developer, the client, a colleague |
 
-Every node is described with 19 fields in three nested levels; each level is the first part of the next:
+Every node is described with 19 fields in three nested tiers; each tier is the first part of the next:
 
-| Level | Fields | When |
+| Tier | Fields | When |
 | --- | --- | --- |
 | Draft | N1–N9 | Enough for a draft: every input already has a source and every output a destination (`CC-1`), and the card has a status (`CC-10`) |
 | External | N1–N13 | The whole card of an external node |
@@ -166,7 +166,7 @@ A compiled model is consistent if it passes all these checks. An AI can run them
 | CC-18 | The engine declares how it stops, and each of its compute resources has an environment | Yes |
 | CC-19 | Every reference to a shared component (standard, template, engine, tool) uses a stable identifier and a pinned version, never a location (`P15`) | Yes |
 
-## MM-9 Example: same card, two levels
+## MM-9 Same card, product and method
 
 A product node and a method node filled in with the same card; the values are illustrative.
 
