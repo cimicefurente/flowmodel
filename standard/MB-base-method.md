@@ -6,7 +6,7 @@ A generic starting point, to adapt to each project. Every step is a node with it
 
 Each step of the method is assigned to the lowest level that is enough: what a script can do is not done by an AI; what an AI with a verifier can do is not done by a person.
 
-| Level | Node type (N2) | Determinism (N7) | Examples | Verification |
+| Level | Node type (N3) | Determinism (N8) | Examples | Verification |
 | --- | --- | --- | --- | --- |
 | Mechanical | Tool, automatic verifier | Yes | Create a branch or a working folder, run the checks, push, open a PR, read the outcome of a run, the Integration gate, clean-up | The script's own tests |
 | Judgement | AI agent, AI reviewer | No | Specify, break down, implement, review, propose the retrospective | A verifier downstream (`P3`) |
