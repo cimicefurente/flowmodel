@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 470" width="980" height="470" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>MB-2 Steps of the base method</title>
+  <desc>3x3 snake grid: 1-2-3 on top, 6-5-4 in the middle, 7-8-9 at the bottom. Return edges: 7 to 6 if verification fails (max N); beyond N the person decides and sends the work to 6 (retry), 5 (rewrite the task) or 3 (revisit the decision); 9 to 3 for a new cycle.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+    <marker id="arrowP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#007a74"/>
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #c4c9d2; stroke-width: 1.2; }
+      .gate { fill: #eef5ff; stroke: #0a5fd0; stroke-width: 1.8; }
+      .person { fill: #ecfaf8; stroke: #007a74; stroke-width: 1.6; }
+      .t { font-size: 13px; font-weight: 700; fill: #111827; }
+      .who { font-size: 11px; fill: #007a74; }
+      .out { font-size: 11px; fill: #374151; }
+      .edge { stroke: #6b7280; stroke-width: 1.3; fill: none; marker-end: url(#arrow); }
+      .pedge { stroke: #007a74; stroke-width: 1.3; fill: none; marker-end: url(#arrowP); }
+      .trunk { stroke: #007a74; stroke-width: 1.3; fill: none; }
+      .lab { font-size: 11px; fill: #4b5563; }
+      .plab { font-size: 11px; fill: #007a74; }
+      .title { font-size: 13px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="980" height="470" rx="10" fill="#f8f9fb"/>
+  <text class="title" x="30" y="30">No AI output changes the product without going through verification</text>
+
+  <!-- Row 1: 1 → 2 → 3 -->
+  <rect class="box" x="200" y="82" width="200" height="72" rx="6"/>
+  <text class="t" x="214" y="104">1. Idea</text>
+  <text class="who" x="214" y="123">person</text>
+  <text class="out" x="214" y="141">→ project description</text>
+
+  <rect class="box" x="440" y="82" width="200" height="72" rx="6"/>
+  <text class="t" x="454" y="104">2. Clarification</text>
+  <text class="who" x="454" y="123">AI + person</text>
+  <text class="out" x="454" y="141">→ decisions, glossary</text>
+
+  <rect class="box" x="680" y="82" width="200" height="72" rx="6"/>
+  <text class="t" x="694" y="104">3. Decision</text>
+  <text class="who" x="694" y="123">person</text>
+  <text class="out" x="694" y="141">→ decision record (ADR)</text>
+
+  <!-- Row 2: 6 ← 5 ← 4 -->
+  <rect class="box" x="200" y="200" width="200" height="72" rx="6"/>
+  <text class="t" x="214" y="222">6. Execution</text>
+  <text class="who" x="214" y="241">AI agent</text>
+  <text class="out" x="214" y="259">→ proposed change (PR)</text>
+
+  <rect class="box" x="440" y="200" width="200" height="72" rx="6"/>
+  <text class="t" x="454" y="222">5. Breakdown</text>
+  <text class="who" x="454" y="241">AI agent</text>
+  <text class="out" x="454" y="259">→ tasks with criteria</text>
+
+  <rect class="box" x="680" y="200" width="200" height="72" rx="6"/>
+  <text class="t" x="694" y="222">4. Specification</text>
+  <text class="who" x="694" y="241">AI agent</text>
+  <text class="out" x="694" y="259">→ spec of one slice</text>
+
+  <!-- Row 3: 7 → 8 → 9 -->
+  <rect class="gate" x="200" y="362" width="200" height="72" rx="6"/>
+  <text class="t" x="214" y="384">7. Verification</text>
+  <text class="who" x="214" y="403">tests + independent reviewer</text>
+  <text class="out" x="214" y="421">→ outcome</text>
+
+  <rect class="box" x="440" y="362" width="200" height="72" rx="6"/>
+  <text class="t" x="454" y="384">8. Integration</text>
+  <text class="who" x="454" y="403">verifier (gate)</text>
+  <text class="out" x="454" y="421">→ new product state</text>
+
+  <rect class="box" x="680" y="362" width="200" height="72" rx="6"/>
+  <text class="t" x="694" y="384">9. Retrospective</text>
+  <text class="who" x="694" y="403">AI + person</text>
+  <text class="out" x="694" y="421">→ changes to method and rules</text>
+
+  <!-- The person node, beyond N attempts -->
+  <rect class="person" x="30" y="295" width="140" height="44" rx="22"/>
+  <text class="t" x="100" y="314" text-anchor="middle">The person</text>
+  <text class="t" x="100" y="330" text-anchor="middle">decides</text>
+
+  <!-- Forward edges -->
+  <line class="edge" x1="400" y1="118" x2="438" y2="118"/>
+  <line class="edge" x1="640" y1="118" x2="678" y2="118"/>
+  <line class="edge" x1="780" y1="154" x2="780" y2="198"/>
+  <line class="edge" x1="680" y1="236" x2="642" y2="236"/>
+  <line class="edge" x1="440" y1="236" x2="402" y2="236"/>
+  <line class="edge" x1="260" y1="272" x2="260" y2="360"/>
+  <text class="lab" x="250" y="320" text-anchor="end">PR</text>
+  <line class="edge" x1="400" y1="398" x2="438" y2="398"/>
+  <text class="lab" x="419" y="390" text-anchor="middle">ok</text>
+  <line class="edge" x1="640" y1="398" x2="678" y2="398"/>
+
+  <!-- Return 7 → 6 -->
+  <line class="edge" x1="340" y1="362" x2="340" y2="274"/>
+  <text class="lab" x="352" y="322">fails: retry (max N)</text>
+
+  <!-- 7 → person, beyond N -->
+  <polyline class="edge" points="200,398 100,398 100,341"/>
+  <text class="lab" x="40" y="416">beyond N attempts</text>
+
+  <!-- Exits of the person: 6, 5, 3 -->
+  <line class="trunk" x1="100" y1="295" x2="100" y2="60"/>
+  <polyline class="pedge" points="100,236 198,236"/>
+  <text class="plab" x="110" y="229">retry</text>
+  <polyline class="pedge" points="100,177 540,177 540,198"/>
+  <text class="plab" x="110" y="171">rewrite the task</text>
+  <polyline class="pedge" points="100,60 780,60 780,80"/>
+  <text class="plab" x="110" y="54">revisit the decision</text>
+
+  <!-- Return 9 → 3 -->
+  <polyline class="edge" points="880,398 925,398 925,118 882,118"/>
+  <text class="lab" x="942" y="258" text-anchor="middle" transform="rotate(-90 942 258)">new cycle</text>
+</svg>

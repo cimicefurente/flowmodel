@@ -1,0 +1,9 @@
+# Protected area (MB-6, ADR-0005): every change needs the maintainer's approval.
+# Agents never edit this file.
+/standard/      @cimicefurente
+/prompts/       @cimicefurente
+/docs/adr/      @cimicefurente
+/AGENTS.md      @cimicefurente
+/CLAUDE.md      @cimicefurente
+/.github/       @cimicefurente
+/.claude/       @cimicefurente
