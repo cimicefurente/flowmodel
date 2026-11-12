@@ -10,3 +10,4 @@ The engine and agents must read cards as data, not parse prose. Each card is one
 ## Considered options
 
 - Markdown cards read by a parser: easier to read by hand, but the format has no schema and every layout change breaks the parser.
+- Markdown with YAML frontmatter: the fields are validated, but the frontmatter and the body can drift apart, and agents would read prose that duplicates the fields (`P1`).
