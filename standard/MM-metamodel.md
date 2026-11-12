@@ -58,30 +58,34 @@ Node types:
 | Person | No | The developer, the client, a colleague |
 | External | Outside your control | A management system, a Git platform, a third-party API |
 
-Every node is described with 16 fields. The first four are enough for a draft; the others are filled in when the node becomes important or risky.
+Every node is described with 18 fields. The first five are enough for a draft; the others are filled in when the node becomes important or risky.
 
 | # | Field | Question it answers |
 | --- | --- | --- |
-| N1 | ID and name | What do we call it, stably? |
-| N2 | Type | One of the types above |
-| N3 | Purpose | What does it do, in one sentence? |
-| N4 | Input | From whom, which artifact, with which trigger, with which preconditions? |
-| N5 | Controls | Which constraints limit it without being inputs? |
-| N6 | Executor and permissions | Who or what runs it, with which capabilities and which context? |
-| N7 | Determinism | Same input, same output? |
-| N8 | Transformation | What does it do to the input; which side effects does it have? |
-| N9 | State | What does it read and write besides messages? |
-| N10 | Output | To whom, which artifact, with which postconditions? |
-| N11 | Verification | How do we know the output is correct, and who checks it? |
-| N12 | Errors and limits | Which error outputs, which budget, after how many attempts does it pass to whom? |
-| N13 | Measures | What is measured to know it works and to improve it? |
-| N14 | Zoom | Does it contain a sub-flow? Which one? |
-| N15 | Owner | Who may change this card? |
-| N16 | Card status | Hypothesis, decided or superseded, with the reference to the decision? |
+| N1 | ID | What is its stable key? It never changes, even if the name does |
+| N2 | Name | What do people call it? It may change, and each project may replace it with its own term |
+| N3 | Type | One of the types above |
+| N4 | Purpose | What does it do, in one sentence? |
+| N5 | Input | From whom, which artifact, with which trigger, with which preconditions? |
+| N6 | Controls | Which constraints limit it without being inputs? |
+| N7 | Executor and permissions | Who or what runs it, with which capabilities and which context? |
+| N8 | Determinism | Same input, same output? |
+| N9 | Transformation | What does it do to the input; which side effects does it have? |
+| N10 | State | What does it read and write besides messages? |
+| N11 | Output | To whom, which artifact, with which postconditions? |
+| N12 | Verification | How do we know the output is correct, and who checks it? |
+| N13 | Errors and limits | Which error outputs, which budget, after how many attempts does it pass to whom? |
+| N14 | Measures | What is measured to know it works and to improve it? |
+| N15 | Zoom | Does it contain a sub-flow? Which one? |
+| N16 | Owner | Who may change this card? |
+| N17 | Card status | Hypothesis, decided or superseded, with the reference to the decision? |
+| N18 | Contract version | Which version of its inputs and outputs (N5, N11) do others depend on? Major when a change breaks them, minor when it only adds |
 
-Field N7 decides a lot: a non-deterministic node (AI, person) always needs a verifier downstream (N11, `P3`).
+Field N8 decides a lot: a non-deterministic node (AI, person) always needs a verifier downstream (N12, `P3`).
 
-An external node has a reduced card: N1–N4, N10, N12, plus two fields of its own: maximum wait time and fallback when it does not answer (`P14`). Example: a pipeline that downloads a tool from an external site fails if the site answers with an error; the card says how many attempts to make and what happens next.
+N18 versions the node's contract, not the card: the card's own history is in version control (`P1`). A whole project used by another project is, from outside, a node with its own contract version and, inside, a sub-flow (N15).
+
+An external node has a reduced card: N1–N5, N11, N13, N18, plus two fields of its own: maximum wait time and fallback when it does not answer (`P14`). Example: a pipeline that downloads a tool from an external site fails if the site answers with an error; the card says how many attempts to make and what happens next.
 
 ## MM-5 Other cards
 
@@ -163,18 +167,20 @@ A product node and a method node filled in with the same card; the values are il
 | Field | Product: order service | Method: executor |
 | --- | --- | --- |
 | N1 ID | `orders-service` | `executor` |
-| N2 Type | Component | AI agent |
-| N3 Purpose | Records an order and starts the payment | Implements a task and proposes a change |
-| N4 Input | `CreateOrder` from the public API, synchronous call; authenticated user | Task from the engine, event; acceptance criteria present |
-| N5 Controls | Validation rules; rate limit | Rules for agents; perimeter of allowed files |
-| N6 Executor and permissions | The service process; writes only the orders table | A coding agent; writes only on its own branch |
-| N7 Determinism | Yes | No |
-| N8 Transformation | Validates, saves, emits an event | Writes tests and code |
-| N9 State | Writes the orders database | Reads the repo, writes the branch |
-| N10 Output | `OrderCreated` to the payment service, event | Proposed change (PR) to the reviewer |
-| N11 Verification | Contract tests; error monitoring | Automated tests + independent reviewer + person |
-| N12 Errors and limits | `InvalidOrder` to the caller; 3 attempts on the event | After 3 attempts the person decides |
-| N13 Measures | Latency, error rate | Duration, cost, attempts |
-| N14 Zoom | — | Test-first cycle |
-| N15 Owner | Product team | The person (protected area, `MB-6`) |
-| N16 Card status | Decided | Hypothesis |
+| N2 Name | Order service | Executor |
+| N3 Type | Component | AI agent |
+| N4 Purpose | Records an order and starts the payment | Implements a task and proposes a change |
+| N5 Input | `CreateOrder` from the public API, synchronous call; authenticated user | Task from the engine, event; acceptance criteria present |
+| N6 Controls | Validation rules; rate limit | Rules for agents; perimeter of allowed files |
+| N7 Executor and permissions | The service process; writes only the orders table | A coding agent; writes only on its own branch |
+| N8 Determinism | Yes | No |
+| N9 Transformation | Validates, saves, emits an event | Writes tests and code |
+| N10 State | Writes the orders database | Reads the repo, writes the branch |
+| N11 Output | `OrderCreated` to the payment service, event | Proposed change (PR) to the reviewer |
+| N12 Verification | Contract tests; error monitoring | Automated tests + independent reviewer + person |
+| N13 Errors and limits | `InvalidOrder` to the caller; 3 attempts on the event | After 3 attempts the person decides |
+| N14 Measures | Latency, error rate | Duration, cost, attempts |
+| N15 Zoom | — | Test-first cycle |
+| N16 Owner | Product team | The person (protected area, `MB-6`) |
+| N17 Card status | Decided | Hypothesis |
+| N18 Contract version | `2.1` | `1.0` |
