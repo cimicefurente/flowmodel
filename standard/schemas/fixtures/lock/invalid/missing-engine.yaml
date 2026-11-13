@@ -1,0 +1,12 @@
+# The lock file pins the engine (ADR-0009).
+# expect: /
+kind: lock
+standard: "0.1.0"
+templates:
+  - TA-1
+  - TK-1
+tools:
+  - id: engineering-skills
+    version: "1.4.2"
+  - id: test-runner
+    version: v8.3.0

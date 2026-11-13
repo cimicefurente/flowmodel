@@ -1,0 +1,17 @@
+# Entries whose fields are not decided yet hold the placeholder (MM-1).
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input:
+  - from: to be decided
+    artifact: to be decided
+output:
+  - to: to be decided
+    artifact: order-created
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004

@@ -1,0 +1,21 @@
+# Every output names its destination; a final state is a state card (CC-1).
+# expect: /output/0
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input:
+  - from: public-api
+    artifact: create-order
+    trigger: Synchronous call
+    preconditions: The user is authenticated.
+output:
+  - artifact: order-created
+    final_state: true
+    postconditions: The order is saved.
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004
