@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:constraint",
+  "title": "Constraint card",
+  "description": "A constraint card (MM-5). A quality constraint is written as a measurable scenario.",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "constraint"
+    },
+    "type": {
+      "anyOf": [
+        {
+          "enum": [
+            "structure",
+            "security",
+            "quality",
+            "process"
+          ]
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "rule": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "applies_to": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "why": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "evidence": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/texts"
+    },
+    "changeable_by": {
+      "description": "Who can change the constraint.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "enforcement": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "description": "mechanical (by CI, permissions...) or instruction (only written for whoever must follow it).",
+              "anyOf": [
+                {
+                  "enum": [
+                    "mechanical",
+                    "instruction"
+                  ]
+                },
+                {
+                  "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+                }
+              ]
+            },
+            "how": {
+              "$ref": "urn:flowmodel:schema:common#/$defs/text"
+            }
+          },
+          "required": [
+            "mode",
+            "how"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "scenario": {
+      "$ref": "#/$defs/scenario"
+    }
+  },
+  "required": [
+    "type",
+    "rule",
+    "applies_to",
+    "enforcement"
+  ],
+  "if": {
+    "properties": {
+      "type": {
+        "const": "quality"
+      }
+    },
+    "required": [
+      "type"
+    ]
+  },
+  "then": {
+    "required": [
+      "scenario"
+    ]
+  },
+  "unevaluatedProperties": false,
+  "$defs": {
+    "scenario": {
+      "description": "A quality scenario (MM-5).",
+      "type": "object",
+      "properties": {
+        "quality": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "stimulus": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "environment": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "expected_response": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "measure": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "verification": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        }
+      },
+      "required": [
+        "quality",
+        "stimulus",
+        "environment",
+        "expected_response",
+        "measure",
+        "verification"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

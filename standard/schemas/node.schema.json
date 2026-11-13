@@ -1,0 +1,491 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:node",
+  "title": "Node card",
+  "description": "A node card (MM-4). A card is one whole tier: draft (N1-N9), external (N1-N13) or full (N1-N19); an external node has exactly the external tier, and its Errors and limits hold a maximum wait time and a fallback (CC-15).",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "node"
+    },
+    "type": {
+      "description": "N3.",
+      "anyOf": [
+        {
+          "enum": [
+            "component",
+            "tool",
+            "verifier",
+            "ai_agent",
+            "person"
+          ]
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "origin": {
+      "description": "N4.",
+      "anyOf": [
+        {
+          "enum": [
+            "internal",
+            "external"
+          ]
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "purpose": {
+      "description": "N5.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "input": {
+      "description": "N6.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/input"
+          }
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "output": {
+      "description": "N7.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/output"
+          }
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "determinism": {
+      "description": "N10.",
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "verification": {
+      "description": "N11.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/verification"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "errors_and_limits": {
+      "description": "N12.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/errors_and_limits"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "contract_version": {
+      "description": "N13: major.minor, quoted.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "controls": {
+      "description": "N14: the constraints that limit the node.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "executor_and_permissions": {
+      "description": "N15.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/executor_and_permissions"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "transformation": {
+      "description": "N16.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/transformation"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "state": {
+      "description": "N17.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/state"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "measures": {
+      "description": "N18.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/measures"
+    },
+    "zoom": {
+      "description": "N19: the ID of the sub-flow, or null when there is none.",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/reference"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "type",
+    "origin",
+    "purpose",
+    "input",
+    "output",
+    "owner",
+    "card_status"
+  ],
+  "dependentRequired": {
+    "determinism": [
+      "verification",
+      "errors_and_limits",
+      "contract_version"
+    ],
+    "verification": [
+      "determinism",
+      "errors_and_limits",
+      "contract_version"
+    ],
+    "errors_and_limits": [
+      "determinism",
+      "verification",
+      "contract_version"
+    ],
+    "contract_version": [
+      "determinism",
+      "verification",
+      "errors_and_limits"
+    ],
+    "controls": [
+      "determinism",
+      "verification",
+      "errors_and_limits",
+      "contract_version",
+      "executor_and_permissions",
+      "transformation",
+      "state",
+      "measures",
+      "zoom"
+    ],
+    "executor_and_permissions": [
+      "determinism",
+      "verification",
+      "errors_and_limits",
+      "contract_version",
+      "controls",
+      "transformation",
+      "state",
+      "measures",
+      "zoom"
+    ],
+    "transformation": [
+      "determinism",
+      "verification",
+      "errors_and_limits",
+      "contract_version",
+      "controls",
+      "executor_and_permissions",
+      "state",
+      "measures",
+      "zoom"
+    ],
+    "state": [
+      "determinism",
+      "verification",
+      "errors_and_limits",
+      "contract_version",
+      "controls",
+      "executor_and_permissions",
+      "transformation",
+      "measures",
+      "zoom"
+    ],
+    "measures": [
+      "determinism",
+      "verification",
+      "errors_and_limits",
+      "contract_version",
+      "controls",
+      "executor_and_permissions",
+      "transformation",
+      "state",
+      "zoom"
+    ],
+    "zoom": [
+      "determinism",
+      "verification",
+      "errors_and_limits",
+      "contract_version",
+      "controls",
+      "executor_and_permissions",
+      "transformation",
+      "state",
+      "measures"
+    ]
+  },
+  "if": {
+    "properties": {
+      "origin": {
+        "const": "external"
+      }
+    },
+    "required": [
+      "origin"
+    ]
+  },
+  "then": {
+    "required": [
+      "determinism",
+      "verification",
+      "errors_and_limits",
+      "contract_version"
+    ],
+    "properties": {
+      "errors_and_limits": {
+        "type": "object",
+        "properties": {
+          "max_wait": {
+            "$ref": "urn:flowmodel:schema:common#/$defs/duration"
+          },
+          "fallback": {
+            "$ref": "urn:flowmodel:schema:common#/$defs/decided_text"
+          }
+        },
+        "required": [
+          "max_wait",
+          "fallback"
+        ]
+      },
+      "controls": false,
+      "executor_and_permissions": false,
+      "transformation": false,
+      "state": false,
+      "measures": false,
+      "zoom": false
+    }
+  },
+  "unevaluatedProperties": false,
+  "$defs": {
+    "input": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+        },
+        "artifact": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+        },
+        "trigger": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "preconditions": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        }
+      },
+      "required": [
+        "from",
+        "artifact"
+      ],
+      "additionalProperties": false
+    },
+    "output": {
+      "description": "Every output has a destination or is a final state (CC-1).",
+      "type": "object",
+      "properties": {
+        "to": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+        },
+        "final_state": {
+          "const": true
+        },
+        "artifact": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+        },
+        "postconditions": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        }
+      },
+      "required": [
+        "artifact"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "to"
+          ]
+        },
+        {
+          "required": [
+            "final_state"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "method": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "verifiers": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/references"
+        }
+      },
+      "required": [
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "errors_and_limits": {
+      "type": "object",
+      "properties": {
+        "error_outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/output"
+          }
+        },
+        "attempts": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+            }
+          ]
+        },
+        "escalation": {
+          "description": "Who the node passes to after the last attempt.",
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "budget": {
+          "anyOf": [
+            {
+              "$ref": "urn:flowmodel:schema:common#/$defs/budget"
+            },
+            {
+              "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+            }
+          ]
+        },
+        "max_wait": {
+          "anyOf": [
+            {
+              "$ref": "urn:flowmodel:schema:common#/$defs/duration"
+            },
+            {
+              "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+            }
+          ]
+        },
+        "fallback": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "executor_and_permissions": {
+      "type": "object",
+      "properties": {
+        "executor": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "capabilities": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/texts"
+        },
+        "context": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        }
+      },
+      "required": [
+        "executor"
+      ],
+      "additionalProperties": false
+    },
+    "transformation": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "side_effects": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/texts"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "state": {
+      "description": "The state cards the node reads and writes.",
+      "type": "object",
+      "properties": {
+        "reads": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/references"
+        },
+        "writes": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/references"
+        }
+      },
+      "required": [
+        "reads",
+        "writes"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

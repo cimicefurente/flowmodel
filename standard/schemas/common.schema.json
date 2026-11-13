@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:common",
+  "title": "Common definitions",
+  "description": "Definitions shared by the card schemas (PA-5). Not a kind: no file is validated against this schema alone.",
+  "$defs": {
+    "tbd": {
+      "description": "A field the person has not decided yet (MM-1).",
+      "const": "to be decided"
+    },
+    "text": {
+      "description": "Prose.",
+      "type": "string",
+      "minLength": 1
+    },
+    "texts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/text"
+      }
+    },
+    "decided_text": {
+      "description": "Prose that a consistency check needs, so it cannot stay to be decided.",
+      "$ref": "#/$defs/text",
+      "not": {
+        "$ref": "#/$defs/tbd"
+      }
+    },
+    "identifier": {
+      "description": "A stable key: letters, digits, '.', '_' and '-', never a path or a URL.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "reference": {
+      "description": "The ID of another card.",
+      "$ref": "#/$defs/identifier"
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "reference_or_tbd": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/reference"
+        },
+        {
+          "$ref": "#/$defs/tbd"
+        }
+      ]
+    },
+    "references_or_tbd": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/references"
+        },
+        {
+          "$ref": "#/$defs/tbd"
+        }
+      ]
+    },
+    "duration": {
+      "description": "An ISO 8601 duration in days, hours, minutes and seconds, e.g. PT30S, PT2H, P1D.",
+      "type": "string",
+      "minLength": 3,
+      "pattern": "^P([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+(\\.[0-9]+)?S)?)?$",
+      "not": {
+        "pattern": "T$"
+      }
+    },
+    "cost": {
+      "description": "An amount in a unit, e.g. a currency or tokens.",
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "amount",
+        "unit"
+      ],
+      "additionalProperties": false
+    },
+    "budget": {
+      "description": "Limits on attempts, duration and cost (P7); at least one.",
+      "type": "object",
+      "properties": {
+        "attempts": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "duration": {
+          "$ref": "#/$defs/duration"
+        },
+        "cost": {
+          "$ref": "#/$defs/cost"
+        }
+      },
+      "minProperties": 1,
+      "additionalProperties": false
+    },
+    "measure": {
+      "description": "A measure (P10). Open: any measure may be declared, deterministic or not, with properties of its own.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "description": {
+          "$ref": "#/$defs/text"
+        },
+        "unit": {
+          "$ref": "#/$defs/text"
+        },
+        "deterministic": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "measures": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/measure"
+          }
+        },
+        {
+          "$ref": "#/$defs/tbd"
+        }
+      ]
+    },
+    "card_status": {
+      "description": "Card status (MM-4 N9, CC-10). A decided or superseded card cites the decision.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "hypothesis",
+            "decided",
+            "superseded"
+          ]
+        },
+        "decision": {
+          "$ref": "#/$defs/decided_text"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false,
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "decided",
+              "superseded"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [
+          "decision"
+        ]
+      }
+    },
+    "card": {
+      "description": "What every card has (MM-5): its kind, an ID, an owner and a card status. Rationale and examples are prose fields of the card.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "owner": {
+          "$ref": "#/$defs/text"
+        },
+        "card_status": {
+          "$ref": "#/$defs/card_status"
+        },
+        "rationale": {
+          "$ref": "#/$defs/text"
+        },
+        "examples": {
+          "$ref": "#/$defs/texts"
+        }
+      },
+      "required": [
+        "kind",
+        "id",
+        "owner",
+        "card_status"
+      ]
+    }
+  }
+}

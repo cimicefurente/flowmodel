@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:artifact",
+  "title": "Artifact card",
+  "description": "An artifact card (MM-5). It has one source of truth (CC-6).",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "artifact"
+    },
+    "type": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "schema": {
+      "description": "Fields and format.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "source_of_truth": {
+      "description": "Where the original lives.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "created_by": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "changed_by": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "life_cycle": {
+      "description": "The states the artifact goes through, in order.",
+      "anyOf": [
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/texts"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "versioning": {
+      "description": "Versioning and backward compatibility.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "sensitivity": {
+      "description": "Kinds of sensitive content, e.g. personal data, secrets; empty when there is none.",
+      "anyOf": [
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/texts"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    }
+  },
+  "required": [
+    "type",
+    "source_of_truth"
+  ],
+  "unevaluatedProperties": false
+}

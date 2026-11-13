@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:state",
+  "title": "State card",
+  "description": "A state card (MM-5). Its writers are the owner of the state (P13); more than one writer needs a concurrency rule (CC-13).",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "state"
+    },
+    "content": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "writers": {
+      "description": "The nodes that write the state.",
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "urn:flowmodel:schema:common#/$defs/reference"
+          },
+          "minItems": 1
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "readers": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "concurrency_rule": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/decided_text"
+    },
+    "persistence": {
+      "description": "Persistence and backup.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "rollback": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    }
+  },
+  "required": [
+    "content",
+    "writers"
+  ],
+  "if": {
+    "properties": {
+      "writers": {
+        "type": "array",
+        "minItems": 2
+      }
+    },
+    "required": [
+      "writers"
+    ]
+  },
+  "then": {
+    "required": [
+      "concurrency_rule"
+    ]
+  },
+  "unevaluatedProperties": false
+}

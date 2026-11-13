@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:edge",
+  "title": "Edge card",
+  "description": "An edge card (MM-5). Its security is declared when it crosses a trust boundary (CC-12).",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "edge"
+    },
+    "from": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+    },
+    "to": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+    },
+    "artifact": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+    },
+    "mode": {
+      "anyOf": [
+        {
+          "enum": [
+            "synchronous_call",
+            "event",
+            "schedule",
+            "shared_state"
+          ]
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "guarantees": {
+      "type": "object",
+      "properties": {
+        "ordering": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "delivery": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "idempotency": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        }
+      },
+      "additionalProperties": false
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "caller_identity": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "permissions_checked": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "validation": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        }
+      },
+      "additionalProperties": false
+    },
+    "contract_evolution": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "on_failure": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    }
+  },
+  "required": [
+    "from",
+    "to",
+    "artifact",
+    "mode"
+  ],
+  "unevaluatedProperties": false
+}
