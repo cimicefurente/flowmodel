@@ -16,6 +16,8 @@ Which skill carries out each step:
 | 8. Integration | — (mechanical gate) |
 | 9. Retrospective | `/retro` |
 
+Triage of incoming tickets: `/triage`.
+
 Rules when adopting it:
 
 - The skills are pinned to one version (`P15`) and copied into the project with their own installer, so every executor runs the same version.
