@@ -45,32 +45,20 @@
       "$ref": "urn:flowmodel:schema:common#/$defs/text"
     },
     "input": {
-      "description": "N6.",
-      "anyOf": [
-        {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/input"
-          }
-        },
-        {
-          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
-        }
-      ]
+      "description": "N6: at least one entry; every input has a source (CC-1).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/input"
+      },
+      "minItems": 1
     },
     "output": {
-      "description": "N7.",
-      "anyOf": [
-        {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/output"
-          }
-        },
-        {
-          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
-        }
-      ]
+      "description": "N7: at least one entry; every output has a destination (CC-1).",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/output"
+      },
+      "minItems": 1
     },
     "determinism": {
       "description": "N10.",
@@ -304,13 +292,19 @@
           "max_wait",
           "fallback"
         ]
-      },
-      "controls": false,
-      "executor_and_permissions": false,
-      "transformation": false,
-      "state": false,
-      "measures": false,
-      "zoom": false
+      }
+    },
+    "propertyNames": {
+      "not": {
+        "enum": [
+          "controls",
+          "executor_and_permissions",
+          "transformation",
+          "state",
+          "measures",
+          "zoom"
+        ]
+      }
     }
   },
   "unevaluatedProperties": false,
@@ -338,14 +332,11 @@
       "additionalProperties": false
     },
     "output": {
-      "description": "Every output has a destination or is a final state (CC-1).",
+      "description": "Every output names its destination (CC-1); an output that ends in a final state names that state card.",
       "type": "object",
       "properties": {
         "to": {
           "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
-        },
-        "final_state": {
-          "const": true
         },
         "artifact": {
           "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
@@ -355,19 +346,8 @@
         }
       },
       "required": [
+        "to",
         "artifact"
-      ],
-      "anyOf": [
-        {
-          "required": [
-            "to"
-          ]
-        },
-        {
-          "required": [
-            "final_state"
-          ]
-        }
       ],
       "additionalProperties": false
     },

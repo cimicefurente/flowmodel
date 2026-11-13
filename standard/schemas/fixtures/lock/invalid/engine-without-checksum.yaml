@@ -11,4 +11,4 @@ tools:
   - id: engineering-skills
     version: "1.4.2"
   - id: test-runner
-    version: v8.3.0
+    version: "8.3.0"

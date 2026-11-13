@@ -62,12 +62,19 @@
       ]
     },
     "duration": {
-      "description": "An ISO 8601 duration in days, hours, minutes and seconds, e.g. PT30S, PT2H, P1D.",
+      "description": "A strictly positive ISO 8601 duration in days, hours, minutes and seconds, e.g. PT30S, PT2H, P1D; never all zero.",
       "type": "string",
       "minLength": 3,
       "pattern": "^P([0-9]+D)?(T([0-9]+H)?([0-9]+M)?([0-9]+(\\.[0-9]+)?S)?)?$",
       "not": {
-        "pattern": "T$"
+        "anyOf": [
+          {
+            "pattern": "T$"
+          },
+          {
+            "pattern": "^P(0+D)?(T(0+H)?(0+M)?(0+(\\.0+)?S)?)?$"
+          }
+        ]
       }
     },
     "cost": {

@@ -12,4 +12,4 @@ tools:
   - id: engineering-skills
     version: "3F2C1A9B8E7D6C5B4A39281706F5E4D3C2B1A098"
   - id: test-runner
-    version: v8.3.0
+    version: "8.3.0"

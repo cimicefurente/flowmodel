@@ -1,0 +1,7 @@
+# Exact versions may carry a pre-release and build metadata.
+kind: lock
+standard: "0.1.0"
+templates: []
+engine:
+  version: "0.2.0-rc.1+build.7"
+  checksum: sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08

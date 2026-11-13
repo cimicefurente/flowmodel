@@ -90,8 +90,10 @@
     ]
   },
   "else": {
-    "properties": {
-      "question": false
+    "propertyNames": {
+      "not": {
+        "const": "question"
+      }
     }
   },
   "additionalProperties": false

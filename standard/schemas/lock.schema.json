@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:flowmodel:schema:lock",
   "title": "Lock file",
-  "description": "The project's lock file (P15, PA-5): identifiers and versions only, never a path, a repo or a URL (CC-19).",
+  "description": "The project's lock file (P15, PA-5): identifiers and exact versions only, never a path, a repo, a URL or a range (CC-19).",
   "type": "object",
   "properties": {
     "kind": {
@@ -49,9 +49,7 @@
             "$ref": "urn:flowmodel:schema:common#/$defs/identifier"
           },
           "version": {
-            "description": "A version starting with a digit or 'v', or a full commit hash; never a range or a moving name.",
-            "type": "string",
-            "pattern": "^(v?[0-9][0-9A-Za-z.+_-]*|[0-9a-f]{40}|[0-9a-f]{64})$"
+            "$ref": "#/$defs/exact_version"
           }
         },
         "required": [
@@ -65,14 +63,26 @@
   "required": [
     "kind",
     "standard",
-    "templates"
+    "templates",
+    "engine"
   ],
   "additionalProperties": false,
   "$defs": {
     "semver": {
-      "description": "A semantic version, quoted.",
+      "description": "An exact semantic version MAJOR.MINOR.PATCH, quoted; never a range, a partial version or a moving name (SNAPSHOT, latest).",
       "type": "string",
-      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$"
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$",
+      "not": {
+        "pattern": "[Ss][Nn][Aa][Pp][Ss][Hh][Oo][Tt]|[Ll][Aa][Tt][Ee][Ss][Tt]"
+      }
+    },
+    "exact_version": {
+      "description": "An exact semantic version, or a full 40-character commit hash in lowercase; never a range, a partial version or a moving name (SNAPSHOT, latest).",
+      "type": "string",
+      "pattern": "^((0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?|[0-9a-f]{40})$",
+      "not": {
+        "pattern": "[Ss][Nn][Aa][Pp][Ss][Hh][Oo][Tt]|[Ll][Aa][Tt][Ee][Ss][Tt]"
+      }
     }
   }
 }

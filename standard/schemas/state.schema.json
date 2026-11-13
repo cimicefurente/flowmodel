@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:flowmodel:schema:state",
   "title": "State card",
-  "description": "A state card (MM-5). Its writers are the owner of the state (P13); more than one writer needs a concurrency rule (CC-13).",
+  "description": "A state card (MM-5). More than one writer needs a concurrency rule (CC-13).",
   "type": "object",
   "$ref": "urn:flowmodel:schema:common#/$defs/card",
   "properties": {
