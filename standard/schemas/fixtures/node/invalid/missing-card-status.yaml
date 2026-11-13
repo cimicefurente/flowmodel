@@ -1,4 +1,5 @@
 # Every card has a status (CC-10).
+# expect: /
 kind: node
 id: orders-service
 name: Order service

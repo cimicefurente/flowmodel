@@ -1,3 +1,4 @@
+# expect: /
 kind: boundary
 id: backend
 owner: Product team

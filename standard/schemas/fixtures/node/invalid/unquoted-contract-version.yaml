@@ -1,4 +1,5 @@
 # YAML reads 2.1 as a number; versions are quoted (PA-5).
+# expect: /contract_version
 kind: node
 id: orders-service
 name: Order service

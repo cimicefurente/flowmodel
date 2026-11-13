@@ -1,4 +1,5 @@
 # A budget has at least one limit.
+# expect: /cycles/0/budget
 kind: flow
 id: place-order
 name: The user places an order

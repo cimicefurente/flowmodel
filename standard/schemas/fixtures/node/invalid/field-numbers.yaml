@@ -1,4 +1,5 @@
 # Keys are field names, never field numbers.
+# expect: /
 kind: node
 N1: orders-service
 N2: Order service

@@ -1,4 +1,5 @@
 # The full tier includes N10-N13.
+# expect: /
 kind: node
 id: orders-service
 name: Order service

@@ -1,4 +1,5 @@
 # CC-10
+# expect: /card_status
 kind: edge
 id: order-to-payment
 owner: Product team

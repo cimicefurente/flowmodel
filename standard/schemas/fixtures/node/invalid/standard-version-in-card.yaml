@@ -1,4 +1,5 @@
 # Cards declare only their kind; the version is in the lock file.
+# expect: /
 kind: node
 standard: "0.1.0"
 id: orders-service

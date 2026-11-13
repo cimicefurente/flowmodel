@@ -1,3 +1,4 @@
+# expect: /kind
 kind: edge
 id: orders-service
 name: Order service

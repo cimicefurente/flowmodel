@@ -1,3 +1,4 @@
+# expect: /enforcement/mode
 kind: constraint
 id: list-latency
 owner: The person

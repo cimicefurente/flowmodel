@@ -1,3 +1,4 @@
+# expect: /cost/amount
 kind: outcome
 status: question
 summary: The ticket and the ADR disagree on the lock file name.

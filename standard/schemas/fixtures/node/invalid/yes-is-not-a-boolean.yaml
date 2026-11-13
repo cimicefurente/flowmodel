@@ -1,4 +1,5 @@
 # Only true and false are booleans (YAML 1.2, PA-5).
+# expect: /determinism
 kind: node
 id: orders-service
 name: Order service

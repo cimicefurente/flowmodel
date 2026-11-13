@@ -1,4 +1,5 @@
 # CC-13
+# expect: /
 kind: state
 id: orders-database
 owner: Product team

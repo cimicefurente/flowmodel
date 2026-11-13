@@ -1,4 +1,5 @@
 # Every output has a destination or is a final state (CC-1).
+# expect: /output/0
 kind: node
 id: orders-service
 name: Order service

@@ -1,4 +1,5 @@
 # External is an origin, not a type.
+# expect: /type
 kind: node
 id: orders-service
 name: Order service

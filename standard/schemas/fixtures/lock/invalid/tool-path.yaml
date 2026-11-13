@@ -1,4 +1,5 @@
 # CC-19
+# expect: /tools/1/id
 kind: lock
 standard: "0.1.0"
 templates:

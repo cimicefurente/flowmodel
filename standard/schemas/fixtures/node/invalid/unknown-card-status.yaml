@@ -1,4 +1,5 @@
 # Card status is hypothesis, decided or superseded.
+# expect: /card_status/status
 kind: node
 id: orders-service
 name: Order service

@@ -1,3 +1,4 @@
+# expect: /mode
 kind: edge
 id: order-to-payment
 owner: Product team

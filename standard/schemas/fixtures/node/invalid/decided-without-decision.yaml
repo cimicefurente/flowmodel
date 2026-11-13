@@ -1,4 +1,5 @@
 # A decided card cites the decision (CC-10).
+# expect: /card_status
 kind: node
 id: orders-service
 name: Order service

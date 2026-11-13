@@ -1,3 +1,4 @@
+# expect: /type
 kind: constraint
 id: list-latency
 owner: The person

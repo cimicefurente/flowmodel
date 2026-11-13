@@ -1,4 +1,5 @@
 # Output is part of the draft tier.
+# expect: /
 kind: node
 id: orders-service
 name: Order service

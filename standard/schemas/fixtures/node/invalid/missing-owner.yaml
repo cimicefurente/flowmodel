@@ -1,4 +1,5 @@
 # Every card has an owner (MM-5).
+# expect: /
 kind: node
 id: orders-service
 name: Order service

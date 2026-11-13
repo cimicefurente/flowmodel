@@ -1,3 +1,4 @@
+# expect: /origin
 kind: node
 id: orders-service
 name: Order service

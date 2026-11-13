@@ -1,4 +1,5 @@
-# CC-15: the wait and the fallback cannot stay undecided.
+# CC-15: the maximum wait time of an external node cannot stay undecided.
+# expect: /errors_and_limits/max_wait
 kind: node
 id: model-provider
 name: Model provider
@@ -26,5 +27,5 @@ errors_and_limits:
   attempts: 3
   escalation: The person decides.
   max_wait: to be decided
-  fallback: to be decided
+  fallback: The executor stops and reports the task as blocked.
 contract_version: "1.0"

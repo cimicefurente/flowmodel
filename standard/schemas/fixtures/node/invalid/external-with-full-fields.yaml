@@ -1,4 +1,5 @@
 # The whole card of an external node is N1-N13.
+# expect: /
 kind: node
 id: model-provider
 name: Model provider

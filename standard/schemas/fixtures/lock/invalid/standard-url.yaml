@@ -1,4 +1,5 @@
 # CC-19: a URL, not a version.
+# expect: /standard
 kind: lock
 standard: https://github.com/example/flowmodel/tree/standard/v0.1.0/standard
 templates:

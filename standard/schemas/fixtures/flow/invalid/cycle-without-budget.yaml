@@ -1,4 +1,5 @@
 # CC-5
+# expect: /cycles/0
 kind: flow
 id: place-order
 name: The user places an order

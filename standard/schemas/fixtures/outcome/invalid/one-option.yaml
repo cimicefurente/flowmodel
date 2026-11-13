@@ -1,4 +1,5 @@
 # A decision needs a choice (MB-4).
+# expect: /question/options
 kind: outcome
 status: question
 summary: The ticket and the ADR disagree on the lock file name.

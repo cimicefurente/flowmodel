@@ -1,4 +1,5 @@
 # An ID is a stable key, not a path.
+# expect: /id
 kind: node
 id: services/orders
 name: Order service

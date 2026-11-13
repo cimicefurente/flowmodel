@@ -1,4 +1,5 @@
 # A quality constraint is a measurable scenario (MM-5).
+# expect: /
 kind: constraint
 id: list-latency
 owner: The person

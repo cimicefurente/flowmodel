@@ -1,3 +1,4 @@
+# expect: /tools/0
 kind: lock
 standard: "0.1.0"
 templates:

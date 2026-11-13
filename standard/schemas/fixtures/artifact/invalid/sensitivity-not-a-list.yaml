@@ -1,3 +1,4 @@
+# expect: /sensitivity
 kind: artifact
 id: order
 name: Order

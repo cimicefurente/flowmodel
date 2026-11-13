@@ -1,4 +1,5 @@
 # CC-19: a path, not a version.
+# expect: /standard
 kind: lock
 standard: ../flowmodel/standard
 templates:

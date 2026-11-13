@@ -1,3 +1,4 @@
+# expect: /
 kind: lock
 templates:
   - TA-1

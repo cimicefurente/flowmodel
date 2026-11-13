@@ -1,4 +1,5 @@
 # MM-5 fields have names, not numbers.
+# expect: /
 kind: artifact
 id: order
 name: Order

@@ -1,4 +1,5 @@
 # CC-19: templates by ID, not by file.
+# expect: /templates/0
 kind: lock
 standard: "0.1.0"
 templates:

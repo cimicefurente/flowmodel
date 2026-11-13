@@ -1,4 +1,5 @@
 # A measure has a name.
+# expect: /measures/1
 kind: node
 id: orders-service
 name: Order service

@@ -1,3 +1,4 @@
+# expect: /measures
 kind: flow
 id: place-order
 name: The user places an order
