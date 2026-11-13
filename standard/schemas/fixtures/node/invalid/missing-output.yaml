@@ -1,0 +1,16 @@
+# Output is part of the draft tier.
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input:
+  - from: public-api
+    artifact: create-order
+    trigger: Synchronous call
+    preconditions: The user is authenticated.
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004

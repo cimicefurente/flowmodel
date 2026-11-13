@@ -1,0 +1,17 @@
+# Only true and false are booleans (YAML 1.2, PA-5).
+kind: boundary
+id: backend
+owner: Product team
+card_status:
+  status: hypothesis
+contains:
+  - orders-service
+  - payment-service
+  - orders-database
+trust_boundary: yes
+may_enter:
+  - Authenticated API calls.
+may_leave:
+  - Events to the payment provider.
+allowed_dependencies:
+  - model-provider

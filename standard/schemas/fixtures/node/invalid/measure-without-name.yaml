@@ -1,0 +1,47 @@
+# A measure has a name.
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input:
+  - from: public-api
+    artifact: create-order
+    trigger: Synchronous call
+    preconditions: The user is authenticated.
+output:
+  - to: payment-service
+    artifact: order-created
+    postconditions: The order is saved.
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004
+determinism: true
+verification:
+  method: Contract tests; error monitoring.
+errors_and_limits:
+  error_outputs:
+    - to: public-api
+      artifact: invalid-order
+  attempts: 3
+contract_version: "2.1"
+controls:
+  - validation-rules
+  - rate-limit
+executor_and_permissions:
+  executor: The service process.
+  capabilities:
+    - write the orders table
+transformation:
+  description: Validates, saves, emits an event.
+state:
+  reads: []
+  writes:
+    - orders-database
+measures:
+  - name: latency
+    unit: ms
+  - unit: percent
+zoom: null

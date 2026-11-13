@@ -1,0 +1,29 @@
+# CC-15
+kind: node
+id: model-provider
+name: Model provider
+type: ai_agent
+origin: external
+purpose: Answers prompts sent by the executor.
+input:
+  - from: executor
+    artifact: prompt
+output:
+  - to: executor
+    artifact: completion
+owner: The person
+card_status:
+  status: hypothesis
+determinism: false
+verification:
+  method: The executor's output is checked by the reviewer.
+  verifiers:
+    - reviewer
+errors_and_limits:
+  error_outputs:
+    - to: executor
+      artifact: provider-error
+  attempts: 3
+  escalation: The person decides.
+  fallback: The executor stops and reports the task as blocked.
+contract_version: "1.0"

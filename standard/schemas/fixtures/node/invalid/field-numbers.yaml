@@ -1,0 +1,12 @@
+# Keys are field names, never field numbers.
+kind: node
+N1: orders-service
+N2: Order service
+N3: component
+N4: internal
+N5: Records an order.
+N6: []
+N7: []
+N8: Product team
+N9:
+  status: hypothesis

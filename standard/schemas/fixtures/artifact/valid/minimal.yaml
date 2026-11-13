@@ -1,0 +1,7 @@
+kind: artifact
+id: task
+owner: The person
+card_status:
+  status: hypothesis
+type: Document
+source_of_truth: to be decided

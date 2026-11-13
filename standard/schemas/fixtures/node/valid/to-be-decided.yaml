@@ -1,0 +1,14 @@
+# A draft whose undecided fields hold "to be decided" (MM-1).
+kind: node
+id: payment-service
+name: Payment service
+type: to be decided
+origin: to be decided
+purpose: to be decided
+input: to be decided
+output:
+  - artifact: payment-recorded
+    final_state: true
+owner: to be decided
+card_status:
+  status: hypothesis

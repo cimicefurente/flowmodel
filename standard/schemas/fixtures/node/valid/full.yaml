@@ -1,0 +1,62 @@
+# Full tier: N1-N19, the executor of MM-9.
+kind: node
+id: executor
+name: Executor
+type: ai_agent
+origin: internal
+purpose: Implements a task and proposes a change.
+input:
+  - from: engine
+    artifact: task
+    trigger: Event
+    preconditions: Acceptance criteria present.
+output:
+  - to: reviewer
+    artifact: proposed-change
+owner: The person
+card_status:
+  status: superseded
+  decision: ADR-0012
+determinism: false
+verification:
+  method: Automated tests, an independent reviewer and the person.
+  verifiers:
+    - test-suite
+    - reviewer
+    - person
+errors_and_limits:
+  attempts: 3
+  escalation: After 3 attempts the person decides.
+  budget:
+    duration: PT1H
+    cost:
+      amount: 5
+      unit: USD
+contract_version: "1.0"
+controls:
+  - rules-for-agents
+  - allowed-files
+executor_and_permissions:
+  executor: A coding agent.
+  capabilities:
+    - push to its own branch
+  context: The cards of its node and of the task.
+transformation:
+  description: Writes tests and code.
+  side_effects:
+    - A new branch.
+state:
+  reads:
+    - repo
+  writes:
+    - branch
+measures:
+  - name: duration
+  - name: attempts
+  - name: reviewer-agreement
+    description: Share of reviews the person confirms.
+    deterministic: false
+zoom: test-first-cycle
+rationale: Agents work only on their own branch.
+examples:
+  - A ticket implemented on its own branch.

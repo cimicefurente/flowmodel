@@ -1,0 +1,3 @@
+kind: outcome
+status: failed
+summary: Added the node schema and its fixtures; all checks pass.

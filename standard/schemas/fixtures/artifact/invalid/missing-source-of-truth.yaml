@@ -1,0 +1,21 @@
+# CC-6
+kind: artifact
+id: order
+name: Order
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0002
+type: Data
+schema: JSON with fields id, customer, lines, total.
+created_by:
+  - orders-service
+changed_by:
+  - orders-service
+life_cycle:
+  - draft
+  - confirmed
+  - shipped
+versioning: Fields are only added; a removal is a new major contract version.
+sensitivity:
+  - personal data

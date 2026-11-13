@@ -1,0 +1,12 @@
+kind: constraint
+id: core-independent
+owner: The person
+card_status:
+  status: hypothesis
+type: structure
+rule: The core does not depend on the interface.
+applies_to:
+  - core
+enforcement:
+  mode: instruction
+  how: Written in the rules for agents.

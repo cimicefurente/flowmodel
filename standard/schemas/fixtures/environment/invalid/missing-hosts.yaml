@@ -1,0 +1,9 @@
+kind: environment
+id: production
+owner: Operations
+card_status:
+  status: hypothesis
+resources_and_limits: Two virtual machines, 4 CPU and 8 GB each.
+managed_by: Operations
+configuration_location: Environment variables set by the deployment.
+secrets_location: The platform's secret store.

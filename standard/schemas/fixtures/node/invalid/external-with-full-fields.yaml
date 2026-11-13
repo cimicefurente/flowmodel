@@ -1,0 +1,48 @@
+# The whole card of an external node is N1-N13.
+kind: node
+id: model-provider
+name: Model provider
+type: ai_agent
+origin: external
+purpose: Answers prompts sent by the executor.
+input:
+  - from: executor
+    artifact: prompt
+output:
+  - to: executor
+    artifact: completion
+owner: The person
+card_status:
+  status: hypothesis
+determinism: false
+verification:
+  method: The executor's output is checked by the reviewer.
+  verifiers:
+    - reviewer
+errors_and_limits:
+  error_outputs:
+    - to: executor
+      artifact: provider-error
+  attempts: 3
+  escalation: The person decides.
+  max_wait: PT2M
+  fallback: The executor stops and reports the task as blocked.
+contract_version: "1.0"
+controls:
+  - validation-rules
+  - rate-limit
+executor_and_permissions:
+  executor: The service process.
+  capabilities:
+    - write the orders table
+transformation:
+  description: Validates, saves, emits an event.
+state:
+  reads: []
+  writes:
+    - orders-database
+measures:
+  - name: latency
+    unit: ms
+  - name: error-rate
+zoom: null

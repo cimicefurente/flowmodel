@@ -1,0 +1,26 @@
+# CC-4
+kind: flow
+id: place-order
+name: The user places an order
+owner: Product team
+card_status:
+  status: hypothesis
+goal: The order is recorded and paid.
+trigger: The user confirms the cart.
+nodes:
+  - public-api
+  - orders-service
+  - payment-service
+edges:
+  - order-to-payment
+success_condition: The order is confirmed and paid.
+cycles:
+  - from: payment-service
+    to: orders-service
+    exit_condition: Payment accepted or refused.
+    budget:
+      attempts: 3
+measures:
+  - name: duration
+  - name: cost
+  - name: outcome

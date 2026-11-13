@@ -1,0 +1,21 @@
+# CC-10
+kind: edge
+id: order-to-payment
+owner: Product team
+card_status:
+  status: decided
+from: orders-service
+to: payment-service
+artifact: order-created
+mode: event
+guarantees:
+  ordering: Per order.
+  delivery: At least once.
+  idempotency: The payment service ignores an order it has already seen.
+security:
+  channel: Internal queue over TLS.
+  caller_identity: Service account of the order service.
+  permissions_checked: Publish on the orders topic.
+  validation: Schema of the event.
+contract_evolution: New fields are optional.
+on_failure: The event is retried, then moved to a dead-letter queue.
