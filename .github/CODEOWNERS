@@ -3,6 +3,7 @@
 /standard/      @cimicefurente
 /prompts/       @cimicefurente
 /docs/adr/      @cimicefurente
+/engine/docs/adr/ @cimicefurente
 /AGENTS.md      @cimicefurente
 /CLAUDE.md      @cimicefurente
 /.github/       @cimicefurente
