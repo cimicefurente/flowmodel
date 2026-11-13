@@ -48,6 +48,22 @@ Least context (`P5`): each agent receives only the modules it needs. Each role h
 
 ## PA-5 Format
 
-One card per Markdown file in the project's repo; views as Mermaid diagrams derived from the cards. Illustrations of the model itself (e.g. `MB-2`) may be hand-drawn SVG, with the Mermaid next to them as the textual source.
+Cards:
 
-How a project pins the version of the standard it follows (`P15`) is defined together with the card schemas: to be decided.
+- One card per YAML file (YAML 1.2) in the project's repo, valid against the JSON Schema (2020-12) the standard publishes for its kind in `schemas/`, one schema per card of `MM-4` and `MM-5`.
+- A card declares only its kind (`kind: node`), never the version of the standard: the version comes from the lock file.
+- Keys are field names in `snake_case` (`card_status`, `errors_and_limits`), never field numbers. Prose, such as rationale and examples, goes in the text fields of the schema.
+- Every card has `id`, `owner` and `card_status`; a card that is decided or superseded cites the decision (`CC-10`).
+- A node card is one whole tier of `MM-4`: the schema infers the tier from the fields present, and an external node has exactly the external tier.
+- An undecided field holds the placeholder of `MM-1`, except where a consistency check needs the value (`CC-5`, `CC-15`).
+- Only `true` and `false` are booleans; versions are quoted strings; durations are ISO 8601 durations (`PT30S`, `PT2H`, `P1D`).
+
+Views are Mermaid diagrams derived from the cards. Illustrations of the model itself (e.g. `MB-2`) may be hand-drawn SVG, with the Mermaid next to them as the textual source.
+
+Pinning (`P15`, `CC-19`):
+
+- The standard has one semantic version for its modules, templates and schemas, released as the git tag `standard/vX.Y.Z`.
+- Each project has one lock file (`kind: lock`), valid against its schema in `schemas/`. It records the standard version, the adopted templates by ID (their version is the standard's), the engine version with its checksum and the version of each tool of the toolkit.
+- The lock file holds identifiers and exact versions only: never a path, a repo, a URL, a range or a moving name such as `latest`.
+
+The file an executor writes at the end of a run (`MB-5`) also has a schema in `schemas/` (`kind: outcome`).
