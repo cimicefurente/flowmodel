@@ -4,7 +4,8 @@ id: companion-to-companion
 name: Companion handoff
 owner: The maintainer (protected area, MB-6)
 card_status:
-  status: hypothesis
+  status: decided
+  decision: PR #37, maintainer review of the method cards, 2026-11-14
 from: companion
 to: companion
 artifact: companion-handoff

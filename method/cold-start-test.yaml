@@ -21,7 +21,8 @@ output:
     postconditions: The failed items go back to the handoff or to the rubric.
 owner: The maintainer (protected area, MB-6)
 card_status:
-  status: hypothesis
+  status: decided
+  decision: PR #37, maintainer review of the method cards, 2026-11-14
 determinism: false
 verification:
   method: The fresh session is an AI agent; the maintainer confirms the answer key and the score before the line is logged, so the chain ends in a person (CC-16).

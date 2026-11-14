@@ -32,7 +32,8 @@ output:
     postconditions: Holds only what the tracker cannot hold.
 owner: The maintainer (protected area, MB-6)
 card_status:
-  status: hypothesis
+  status: decided
+  decision: PR #37, maintainer review of the method cards, 2026-11-14
 determinism: false
 verification:
   method: The maintainer decides every question and reviews and merges every pull request; the cold-start test checks the handoff to a fresh session.

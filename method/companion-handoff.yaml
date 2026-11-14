@@ -4,7 +4,8 @@ id: companion-handoff
 name: Companion handoff
 owner: The maintainer (protected area, MB-6)
 card_status:
-  status: hypothesis
+  status: decided
+  decision: PR #37, maintainer review of the method cards, 2026-11-14
 type: Document
 schema: >-
   Plain text in three parts. 1. Written: date and time, and the commit of main
