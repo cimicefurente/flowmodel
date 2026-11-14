@@ -1,37 +1,23 @@
-# The companion as a node of this repo's method (ADR-0005), N1-N13.
-# Its instructions are in prompts/companion.md; the cold-start test is in method/cold-start-test.md.
+# The companion as a node of this repo's method (ADR-0010), full tier (MM-4).
+# agents-rules is AGENTS.md; tracker is the repo's issues and pull requests.
 kind: node
 id: companion
 name: Companion
 type: ai_agent
 origin: internal
-purpose: Coordinates the executors of the open tickets and brings the maintainer every question and report in a form ready for a decision.
+purpose: Coordinates the agents working on the open tickets and brings the maintainer every question and report in a form ready for a decision.
 input:
-  - from: maintainer
-    artifact: agents-rules
-    trigger: Session start.
-    preconditions: AGENTS.md as it is on main.
-  - from: tracker
-    artifact: tracker-state
-    trigger: Session start, then after every event on a ticket or a pull request.
-    preconditions: Every decision and every open question is already written in the tracker.
   - from: companion
     artifact: companion-handoff
     trigger: Session start, when an earlier session handed off.
-    preconditions: The latest handoff; when there is none, the session starts from the other inputs and the list of local worktrees.
-  - from: maintainer
-    artifact: decision
-    trigger: Event, an answer to a question or a merge.
-  - from: executor
-    artifact: executor-report
-    trigger: Event, an executor ends its run.
+    preconditions: The latest handoff; when there is none, the session starts from the tracker and asks the maintainer about every agent or worktree it cannot account for.
 output:
   - to: tracker
     artifact: ticket
     postconditions: Every decision and every question is written in the tracker at once, cited by issue or pull request number.
   - to: executor
     artifact: executor-prompt
-    postconditions: One executor per ticket, in its own worktree; at most three run at once.
+    postconditions: One executor per ticket, in its own worktree; at most three agents run at once.
   - to: reviewer
     artifact: reviewer-prompt
     postconditions: Only for complex tickets; the reviewer is independent of the executor.
@@ -63,11 +49,34 @@ errors_and_limits:
       postconditions: Written at the test threshold and again at the change threshold.
   budget:
     cost:
-      amount: 200000
+      amount: 300000
       unit: context tokens
   escalation: >-
-    Two context thresholds. Test, near 150000 context tokens: warn the maintainer,
-    write the handoff and run the cold-start test on it. Change, near 200000 context
+    Two context thresholds. Test, near 200000 context tokens: warn the maintainer,
+    write the handoff and run the cold-start test on it. Change, near 300000 context
     tokens: warn the maintainer, write the final handoff and stop; a fresh session
     continues from it. Beyond its own rules, the maintainer decides.
 contract_version: "1.0"
+controls:
+  - agents-rules
+executor_and_permissions:
+  executor: An AI agent session, started by the maintainer.
+  capabilities:
+    - start executor and reviewer agents, each in its own worktree
+    - write issues and comments in the tracker, and close a ticket after the maintainer merges its pull request
+    - remove the worktrees of merged work and pull main
+  context: The prompt companion (prompts/companion.md) and the module IDs it lists.
+transformation:
+  description: Turns the tracker's state and the maintainer's decisions into tickets, agent prompts, questions and reports.
+  side_effects:
+    - Agents started and worktrees created and removed on the maintainer's machine.
+state:
+  reads:
+    - tracker
+  writes:
+    - tracker
+measures:
+  - name: cold-start-score
+    description: Items passed in the latest cold-start test.
+    unit: items out of 8
+zoom: null

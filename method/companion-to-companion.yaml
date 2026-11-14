@@ -1,4 +1,4 @@
-# The handoff between two companion sessions; its verifier is the cold-start test (method/cold-start-test.md, P3).
+# The handoff between two companion sessions.
 kind: edge
 id: companion-to-companion
 name: Companion handoff
@@ -13,9 +13,10 @@ guarantees:
   ordering: One handoff per change of session; the latest one supersedes the earlier ones.
   delivery: Once, by the maintainer starting the new session with it.
   idempotency: Reading the same handoff twice gives the same state, because everything outside it is read again from the tracker by number.
-contract_evolution: Parts of the handoff are only added; the cold-start test's rubric changes with them.
+contract_evolution: Parts of the handoff are only added; the rubric of cold-start-test changes with them.
 on_failure: >-
-  If the handoff is missing or the cold-start test fails, the outgoing session
+  If the handoff is missing or cold-start-test fails, the outgoing session
   completes it before it stops; if that session is already gone, the incoming one
   rebuilds the state from the tracker and the list of local worktrees and asks the
-  maintainer about every executor it cannot account for.
+  maintainer about every agent or worktree it cannot account for.
+rationale: The edge schema has no verifier field; this edge's verifier (P3) is the node cold-start-test.

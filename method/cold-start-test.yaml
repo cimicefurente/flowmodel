@@ -1,0 +1,33 @@
+# The verifier of the edge companion-to-companion (P3); its rubric is method/cold-start-test.md.
+kind: node
+id: cold-start-test
+name: Cold-start test
+type: verifier
+origin: internal
+purpose: Checks that a fresh companion session rebuilds the working state from the companion's declared inputs alone.
+input:
+  - from: companion
+    artifact: companion-handoff
+    trigger: The test threshold in the companion's Errors and limits (N12), or a change to the handoff's parts or to the rubric.
+  - from: companion
+    artifact: cold-start-key
+    preconditions: The key of CS-1 and CS-2 is built from the ground truth when the test runs, never from the handoff.
+output:
+  - to: cold-start-log
+    artifact: cold-start-result
+    postconditions: One line, appended only after the maintainer confirms the key and the score.
+  - to: companion
+    artifact: cold-start-result
+    postconditions: The failed items go back to the handoff or to the rubric.
+owner: The maintainer (protected area, MB-6)
+card_status:
+  status: hypothesis
+determinism: false
+verification:
+  method: The fresh session is an AI agent; the maintainer confirms the answer key and the score before the line is logged, so the chain ends in a person (CC-16).
+  verifiers:
+    - maintainer
+errors_and_limits:
+  attempts: 1
+  escalation: A failed result goes to the companion, which fixes the handoff or proposes a change to the rubric; the maintainer decides.
+contract_version: "1.0"

@@ -8,12 +8,13 @@ card_status:
 type: Document
 schema: >-
   Plain text in three parts. 1. Written: date and time, and the commit of main
-  it was written on. 2. Running executors: for each, the ticket number, the
-  agent's ID, its worktree, its branch and what it is doing or waiting for.
-  3. Local worktrees: for each, its path, its branch, the ticket or pull request
-  number, and whether it can be removed. Everything else (decisions, open
-  questions, ticket and pull request states, next steps) is not written here but
-  cited by issue or pull request number.
+  it was written on. 2. Running agents and processes: for each, its ID, the
+  ticket number, its worktree, the branch or pull request where its result will
+  land, and what it is doing or waiting for. 3. Local worktrees: for each, its
+  path, its branch, the ticket or pull request number, whether it holds
+  uncommitted or unpushed work, and whether it can be removed. Everything else
+  (decisions, open questions, ticket and pull request states, next steps) is not
+  written here but cited by issue or pull request number.
 source_of_truth: >-
   The handoff text the outgoing session writes as its last message to the
   maintainer, who gives it to the incoming session as its first input.
