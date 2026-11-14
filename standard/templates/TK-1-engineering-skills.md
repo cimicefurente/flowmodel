@@ -17,6 +17,7 @@ Which skill carries out each step:
 | 9. Retrospective | `/retro` |
 
 Triage of incoming tickets: `/triage`.
+Installed with them: `/setup-matt-pocock-skills` and the skills these call.
 
 Rules when adopting it:
 
