@@ -39,6 +39,8 @@ The flow model: one schema to describe a software product and the method that bu
 **Card tier**: see `MM-4`.
 _Avoid_: level
 
+**Card owner**: see `MM-4`, `MM-5`.
+
 **Card status**: see `MM-4`, `MM-5`, `CC-10`.
 
 **Contract version**: see `MM-4`.
@@ -69,7 +71,7 @@ _Avoid_: level
 
 **Measure**: see `P10`.
 
-**Owner**: see `P13`, `MM-4`, `MM-5`.
+**State owner**: see `P13`, `MM-5`, `CC-13`.
 
 **External node**: see `P14`, `MM-4`, `CC-15`.
 

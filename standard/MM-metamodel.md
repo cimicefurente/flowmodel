@@ -74,7 +74,7 @@ Every node is described with 19 fields in three nested tiers; each tier is the f
 | N5 | Purpose | What does it do, in one sentence? |
 | N6 | Input | From whom, which artifact, with which trigger, with which preconditions? |
 | N7 | Output | To whom, which artifact, with which postconditions? |
-| N8 | Owner | Who may change this card? |
+| N8 | Card owner | Who may change this card? |
 | N9 | Card status | Hypothesis, decided or superseded, with the reference to the decision? |
 | N10 | Determinism | Same input, same output? |
 | N11 | Verification | How do we know the output is correct, and who checks it? |
@@ -95,13 +95,13 @@ Origin is independent of the type: an external AI model is an AI agent with Orig
 
 ## MM-5 Other cards
 
-Each also has an ID, an owner and a card status, like the node.
+Each also has an ID, a card owner and a card status, like the node.
 
 | Card | Fields |
 | --- | --- |
 | Artifact | Type and schema (fields, format); source of truth (where the original lives); who creates and who changes it; life cycle (e.g. draft → approved → superseded); versioning and backward compatibility; sensitivity (personal data, secrets) |
 | Edge | From → to; artifact; mode (synchronous call, event, schedule, shared state); guarantees (ordering, delivery, idempotency); security if it crosses a boundary (channel, caller identity, permissions checked, validation); contract evolution (how it changes without breaking its users); what happens if it fails |
-| State | Content; owner (the only writer, `P13`); readers; concurrency rule if there is more than one writer; persistence and backup; how to roll back |
+| State | Content; state owner (`P13`); writers; readers; concurrency rule if there is more than one writer (`CC-13`); persistence and backup; how to roll back |
 | Flow | Goal; trigger; nodes and edges (diagram); success condition; error paths; cycles with exit condition and budget; measures (duration, cost, outcome) |
 | Constraint | Type (structure, security, quality, process); rule; what it applies to; why, with the evidence; who can change it; how it is enforced (mechanically or only by instruction) |
 | Boundary | What it contains; whether it is a trust boundary; what may enter and leave; which dependencies are allowed |
@@ -158,7 +158,7 @@ A compiled model is consistent if it passes all these checks. An AI can run them
 | CC-10 | Every card has a status; every "decided" card cites the decision | Yes |
 | CC-11 | No document contradicts a higher level of the hierarchy (`MM-7`) | No: judgement |
 | CC-12 | Every edge that crosses a trust boundary has its security declared | Yes |
-| CC-13 | Every state with more than one writer has a concurrency rule | Yes |
+| CC-13 | Every state has exactly one state owner; every state with more than one writer has a concurrency rule | Yes |
 | CC-14 | Every success condition and every acceptance criterion has at least one verifier that names it | Yes |
 | CC-15 | Every external node (N4) has a maximum wait time and a fallback in its Errors and limits (N12) | Yes |
 | CC-16 | Every verification chain ends in a deterministic check or in a person | Yes |
@@ -179,7 +179,7 @@ A product node and a method node filled in with the same card; the values are il
 | N5 Purpose | Records an order and starts the payment | Implements a task and proposes a change |
 | N6 Input | `CreateOrder` from the public API, synchronous call; authenticated user | Task from the engine, event; acceptance criteria present |
 | N7 Output | `OrderCreated` to the payment service, event | Proposed change (PR) to the reviewer |
-| N8 Owner | Product team | The person (protected area, `MB-6`) |
+| N8 Card owner | Product team | The person (protected area, `MB-6`) |
 | N9 Card status | Decided | Hypothesis |
 | N10 Determinism | Yes | No |
 | N11 Verification | Contract tests; error monitoring | Automated tests + independent reviewer + person |

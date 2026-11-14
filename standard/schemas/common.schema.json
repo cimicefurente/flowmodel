@@ -186,7 +186,7 @@
       }
     },
     "card": {
-      "description": "What every card has (MM-5): its kind, an ID, an owner and a card status. Rationale and examples are prose fields of the card.",
+      "description": "What every card has (MM-5): its kind, an ID, a card owner (N8, key `owner`) and a card status. Rationale and examples are prose fields of the card.",
       "type": "object",
       "properties": {
         "kind": {
