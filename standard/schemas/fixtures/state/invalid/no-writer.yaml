@@ -1,0 +1,13 @@
+# Every state has an owner that writes it (P13).
+# expect: /writers
+kind: state
+id: orders-database
+owner: Product team
+card_status:
+  status: hypothesis
+content: Orders and their lines.
+writers: []
+readers:
+  - reporting
+persistence: Daily backup, kept 30 days.
+rollback: Restore the last backup and replay the events.

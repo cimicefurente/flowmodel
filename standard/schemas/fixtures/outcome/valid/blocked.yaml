@@ -1,0 +1,6 @@
+kind: outcome
+status: blocked
+summary: The tests need a service that is not reachable from the working copy.
+cost:
+  amount: 12000
+  unit: tokens

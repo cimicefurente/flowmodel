@@ -16,6 +16,8 @@ Split rule: each module has one kind of reader that loads it, one rate of change
 | `MB` Base method | [`MB-base-method.md`](MB-base-method.md) | Steps, execution levels, cycles, the person as a node, the engine | The engine and the method's agents | At every retrospective |
 | `PA` AI procedure | [`PA-ai-procedure.md`](PA-ai-procedure.md) | Starting a project, questions, what gets loaded | The AI at project start; the system prompts | When the method changes |
 
+The JSON Schemas of the cards, of the lock file and of the executor outcome file are in [`schemas/`](schemas/) (`PA-5`).
+
 System prompts for each role are in [`../prompts/`](../prompts/).
 
 The cards compiled for a project do not live here: they live in the project's own repo, and refer to this standard by identifier and version, never by path (`P15`).

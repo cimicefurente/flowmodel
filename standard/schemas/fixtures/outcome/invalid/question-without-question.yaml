@@ -1,0 +1,7 @@
+# expect: /
+kind: outcome
+status: question
+summary: The ticket and the ADR disagree on the lock file name.
+cost:
+  amount: 0.42
+  unit: USD

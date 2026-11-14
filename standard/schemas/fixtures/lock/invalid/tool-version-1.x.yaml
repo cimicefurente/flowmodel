@@ -1,0 +1,15 @@
+# A lock pins exact versions: '1.x' is a range (P15, PA-5).
+# expect: /tools/0/version
+kind: lock
+standard: "0.1.0"
+templates:
+  - TA-1
+  - TK-1
+engine:
+  version: "0.1.0"
+  checksum: sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+tools:
+  - id: engineering-skills
+    version: "1.x"
+  - id: test-runner
+    version: "8.3.0"

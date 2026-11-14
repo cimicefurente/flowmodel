@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:lock",
+  "title": "Lock file",
+  "description": "The project's lock file (P15, PA-5): identifiers and exact versions only, never a path, a repo, a URL or a range (CC-19).",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "lock"
+    },
+    "standard": {
+      "description": "The version of the standard, without the tag prefix.",
+      "$ref": "#/$defs/semver"
+    },
+    "templates": {
+      "description": "The adopted templates, by ID (T-0, CC-17). Their version is the standard's.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^T[AMPNK]-[0-9]+$"
+      },
+      "uniqueItems": true
+    },
+    "engine": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "$ref": "#/$defs/semver"
+        },
+        "checksum": {
+          "description": "The checksum of the engine release's checksums file, which lists the checksum of each platform's executable.",
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "version",
+        "checksum"
+      ],
+      "additionalProperties": false
+    },
+    "tools": {
+      "description": "The tools of the adopted toolkit (T-0), each with its pinned version.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "urn:flowmodel:schema:common#/$defs/identifier"
+          },
+          "version": {
+            "$ref": "#/$defs/exact_version"
+          }
+        },
+        "required": [
+          "id",
+          "version"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "standard",
+    "templates",
+    "engine"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "semver": {
+      "description": "An exact semantic version MAJOR.MINOR.PATCH, quoted; never a range, a partial version or a moving name (SNAPSHOT, latest).",
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?$",
+      "not": {
+        "pattern": "[Ss][Nn][Aa][Pp][Ss][Hh][Oo][Tt]|[Ll][Aa][Tt][Ee][Ss][Tt]"
+      }
+    },
+    "exact_version": {
+      "description": "An exact semantic version, or a full 40-character commit hash in lowercase; never a range, a partial version or a moving name (SNAPSHOT, latest).",
+      "type": "string",
+      "pattern": "^((0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?|[0-9a-f]{40})$",
+      "not": {
+        "pattern": "[Ss][Nn][Aa][Pp][Ss][Hh][Oo][Tt]|[Ll][Aa][Tt][Ee][Ss][Tt]"
+      }
+    }
+  }
+}

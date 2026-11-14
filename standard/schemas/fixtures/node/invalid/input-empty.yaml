@@ -1,0 +1,17 @@
+# A node has at least one input (CC-1).
+# expect: /input
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input: []
+output:
+  - to: payment-service
+    artifact: order-created
+    postconditions: The order is saved.
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004

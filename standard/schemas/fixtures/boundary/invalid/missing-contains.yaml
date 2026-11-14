@@ -1,0 +1,13 @@
+# expect: /
+kind: boundary
+id: backend
+owner: Product team
+card_status:
+  status: hypothesis
+trust_boundary: true
+may_enter:
+  - Authenticated API calls.
+may_leave:
+  - Events to the payment provider.
+allowed_dependencies:
+  - model-provider

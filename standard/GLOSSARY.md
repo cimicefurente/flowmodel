@@ -73,7 +73,7 @@ _Avoid_: level
 
 **External node**: see `P14`, `MM-4`, `CC-15`.
 
-**Lock file**: see `P15`.
+**Lock file**: see `P15`, `PA-5`.
 
 ### Templates
 

@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:outcome",
+  "title": "Executor outcome file",
+  "description": "The file an executor writes at the end of a run (MB-5): a status, a summary and, only when the status is question, a question in the form of MB-4.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "outcome"
+    },
+    "status": {
+      "enum": [
+        "done",
+        "blocked",
+        "question"
+      ]
+    },
+    "summary": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "question": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/text"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "$ref": "urn:flowmodel:schema:common#/$defs/identifier"
+              },
+              "description": {
+                "$ref": "urn:flowmodel:schema:common#/$defs/text"
+              }
+            },
+            "required": [
+              "id",
+              "description"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 2
+        },
+        "recommendation": {
+          "description": "The ID of the recommended option.",
+          "$ref": "urn:flowmodel:schema:common#/$defs/identifier"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:flowmodel:schema:common#/$defs/text"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "text",
+        "options",
+        "recommendation",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "cost": {
+      "description": "The cost of the run, only when the executor knows it; never estimated.",
+      "$ref": "urn:flowmodel:schema:common#/$defs/cost"
+    }
+  },
+  "required": [
+    "kind",
+    "status",
+    "summary"
+  ],
+  "if": {
+    "properties": {
+      "status": {
+        "const": "question"
+      }
+    },
+    "required": [
+      "status"
+    ]
+  },
+  "then": {
+    "required": [
+      "question"
+    ]
+  },
+  "else": {
+    "propertyNames": {
+      "not": {
+        "const": "question"
+      }
+    }
+  },
+  "additionalProperties": false
+}

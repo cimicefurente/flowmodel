@@ -1,0 +1,18 @@
+# Outputs are typed entries; the placeholder goes in their fields (CC-1, PA-5).
+# expect: /output
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input:
+  - from: public-api
+    artifact: create-order
+    trigger: Synchronous call
+    preconditions: The user is authenticated.
+output: to be decided
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004

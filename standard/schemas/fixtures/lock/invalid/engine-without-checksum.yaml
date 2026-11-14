@@ -1,0 +1,14 @@
+# The engine is pinned with its checksum.
+# expect: /engine
+kind: lock
+standard: "0.1.0"
+templates:
+  - TA-1
+  - TK-1
+engine:
+  version: "0.1.0"
+tools:
+  - id: engineering-skills
+    version: "1.4.2"
+  - id: test-runner
+    version: "8.3.0"

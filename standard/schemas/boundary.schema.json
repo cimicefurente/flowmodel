@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:boundary",
+  "title": "Boundary card",
+  "description": "A boundary card (MM-5).",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "boundary"
+    },
+    "contains": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "trust_boundary": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "may_enter": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/texts"
+    },
+    "may_leave": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/texts"
+    },
+    "allowed_dependencies": {
+      "description": "The cards that what the boundary contains may depend on (CC-8).",
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    }
+  },
+  "required": [
+    "contains",
+    "trust_boundary"
+  ],
+  "unevaluatedProperties": false
+}

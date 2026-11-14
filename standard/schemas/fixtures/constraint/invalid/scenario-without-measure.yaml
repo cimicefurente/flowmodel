@@ -1,0 +1,24 @@
+# expect: /scenario
+kind: constraint
+id: list-latency
+owner: The person
+card_status:
+  status: decided
+  decision: ADR-0006
+type: quality
+rule: The order list opens fast under load.
+applies_to:
+  - orders-service
+why: Customers open the list together at month end.
+evidence:
+  - Support tickets from last quarter.
+changeable_by: The person
+enforcement:
+  mode: mechanical
+  how: Load test in the pipeline, before release.
+scenario:
+  quality: Scalability
+  stimulus: 200 users of the same customer open the order list in the same minute.
+  environment: Production, normal load.
+  expected_response: The list opens without errors.
+  verification: Load test in the pipeline, before release.

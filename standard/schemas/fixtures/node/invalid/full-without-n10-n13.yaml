@@ -1,0 +1,39 @@
+# The full tier includes N10-N13.
+# expect: /
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input:
+  - from: public-api
+    artifact: create-order
+    trigger: Synchronous call
+    preconditions: The user is authenticated.
+output:
+  - to: payment-service
+    artifact: order-created
+    postconditions: The order is saved.
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004
+controls:
+  - validation-rules
+  - rate-limit
+executor_and_permissions:
+  executor: The service process.
+  capabilities:
+    - write the orders table
+transformation:
+  description: Validates, saves, emits an event.
+state:
+  reads: []
+  writes:
+    - orders-database
+measures:
+  - name: latency
+    unit: ms
+  - name: error-rate
+zoom: null

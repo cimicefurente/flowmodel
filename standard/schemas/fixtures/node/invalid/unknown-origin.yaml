@@ -1,0 +1,20 @@
+# expect: /origin
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: partner
+purpose: Records an order and starts the payment.
+input:
+  - from: public-api
+    artifact: create-order
+    trigger: Synchronous call
+    preconditions: The user is authenticated.
+output:
+  - to: payment-service
+    artifact: order-created
+    postconditions: The order is saved.
+owner: Product team
+card_status:
+  status: decided
+  decision: ADR-0004

@@ -1,0 +1,18 @@
+# Every card has a status (CC-10).
+# expect: /
+kind: node
+id: orders-service
+name: Order service
+type: component
+origin: internal
+purpose: Records an order and starts the payment.
+input:
+  - from: public-api
+    artifact: create-order
+    trigger: Synchronous call
+    preconditions: The user is authenticated.
+output:
+  - to: payment-service
+    artifact: order-created
+    postconditions: The order is saved.
+owner: Product team

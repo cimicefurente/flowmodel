@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:environment",
+  "title": "Environment card",
+  "description": "An environment card (MM-5). It says where configuration and secrets live, never their values.",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "environment"
+    },
+    "resources_and_limits": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "managed_by": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "hosts": {
+      "description": "The nodes it hosts (CC-9).",
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "configuration_location": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "secrets_location": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    }
+  },
+  "required": [
+    "resources_and_limits",
+    "managed_by",
+    "hosts"
+  ],
+  "unevaluatedProperties": false
+}

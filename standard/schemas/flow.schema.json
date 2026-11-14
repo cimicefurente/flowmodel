@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flowmodel:schema:flow",
+  "title": "Flow card",
+  "description": "A flow card (MM-5). It has a trigger, a success condition and error paths (CC-4); every cycle has an exit condition and a budget (CC-5).",
+  "type": "object",
+  "$ref": "urn:flowmodel:schema:common#/$defs/card",
+  "properties": {
+    "kind": {
+      "const": "flow"
+    },
+    "goal": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "trigger": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "nodes": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "edges": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/references_or_tbd"
+    },
+    "success_condition": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/text"
+    },
+    "error_paths": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "$ref": "urn:flowmodel:schema:common#/$defs/text"
+          },
+          "minItems": 1
+        },
+        {
+          "$ref": "urn:flowmodel:schema:common#/$defs/tbd"
+        }
+      ]
+    },
+    "cycles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cycle"
+      }
+    },
+    "measures": {
+      "$ref": "urn:flowmodel:schema:common#/$defs/measures"
+    }
+  },
+  "required": [
+    "goal",
+    "trigger",
+    "nodes",
+    "edges",
+    "success_condition",
+    "error_paths"
+  ],
+  "unevaluatedProperties": false,
+  "$defs": {
+    "cycle": {
+      "description": "A return edge from one node of the flow back to an earlier one (MB-3).",
+      "type": "object",
+      "properties": {
+        "from": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+        },
+        "to": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/reference_or_tbd"
+        },
+        "exit_condition": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/decided_text"
+        },
+        "budget": {
+          "$ref": "urn:flowmodel:schema:common#/$defs/budget"
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "exit_condition",
+        "budget"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

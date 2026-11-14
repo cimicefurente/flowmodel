@@ -1,0 +1,9 @@
+kind: edge
+id: api-to-orders
+owner: Product team
+card_status:
+  status: hypothesis
+from: public-api
+to: orders-service
+artifact: create-order
+mode: synchronous_call
