@@ -5,7 +5,7 @@ The rubric of the verifier node `cold-start-test` (its card is `cold-start-test.
 ## How it runs
 
 1. The running companion writes the handoff (`companion-handoff`).
-2. It builds the answer key. The key of CS-1 and CS-2 comes from the ground truth when the test runs: the actual list of worktrees with their uncommitted and unpushed work, and the agents and processes actually running. It never comes from the handoff. The key of CS-3 to CS-7 comes from the tracker.
+2. It builds the answer key. The key of CS-1 and CS-2 comes from the ground truth read when the handoff is written: the actual list of worktrees with their uncommitted and unpushed work, and the agents and processes actually running. It is fixed then, because running agents keep changing that state while the test runs. It never comes from the handoff. The key of CS-3 to CS-7 comes from the tracker.
 3. It starts a fresh session on the fixed model, with no earlier conversation and no memory. The session gets only what the `companion` card declares: its input (N6, the handoff), its constraints (N14, `AGENTS.md`), its context (N15, `prompts/companion.md` and the IDs it loads) and its state (N17, the tracker). It does not see the key, does not list worktrees, agents or processes itself, asks the maintainer nothing and changes nothing.
 4. The fresh session answers every item, citing for each answer the input it comes from and the issue or PR numbers.
 5. The running companion scores each answer against the key and shows the maintainer the key, the answers and the score.
