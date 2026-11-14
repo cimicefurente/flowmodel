@@ -1,6 +1,6 @@
 # Cold-start test log
 
-One line per run of `cold-start-test`, in the format given there; appended, never edited (`P9`).
+The results of `cold-start-test`, one line per run, in the format of `cold-start-test.md`; appended, never edited (`P9`). This file is the only place for them.
 
 | Date | Model | Rubric | Main | Score | Result | Failed | Ref |
 | --- | --- | --- | --- | --- | --- | --- | --- |
