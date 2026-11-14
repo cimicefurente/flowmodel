@@ -18,7 +18,7 @@ Which skill carries out each step:
 
 Triage of incoming tickets: `/triage`.
 
-Installed with them: `/setup-matt-pocock-skills` and the skills these call.
+Installed with the skills above (table and `/triage`): `/setup-matt-pocock-skills` and the skills these call.
 
 Rules when adopting it:
 
