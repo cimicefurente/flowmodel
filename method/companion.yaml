@@ -1,0 +1,83 @@
+# The companion as a node of this repo's method (ADR-0010), full tier (MM-4).
+# agents-rules is AGENTS.md; tracker is the repo's issues and pull requests.
+kind: node
+id: companion
+name: Companion
+type: ai_agent
+origin: internal
+purpose: Coordinates the agents working on the open tickets and brings the maintainer every question and report in a form ready for a decision.
+input:
+  - from: companion
+    artifact: companion-handoff
+    trigger: Session start, when an earlier session handed off.
+    preconditions: The latest handoff; when there is none, the session starts from the tracker and asks the maintainer about every agent or worktree it cannot account for.
+output:
+  - to: tracker
+    artifact: ticket
+    postconditions: Every decision and every question is written in the tracker at once, cited by issue or pull request number.
+  - to: executor
+    artifact: executor-prompt
+    postconditions: One executor per ticket, in its own worktree; at most three agents run at once.
+  - to: reviewer
+    artifact: reviewer-prompt
+    postconditions: Only for complex tickets; the reviewer is independent of the executor.
+  - to: maintainer
+    artifact: question
+    postconditions: One question at a time, with a recommendation.
+  - to: maintainer
+    artifact: report
+    postconditions: Brief, with the evidence cited by issue or pull request number.
+  - to: companion
+    artifact: companion-handoff
+    postconditions: Holds only what the tracker cannot hold.
+owner: The maintainer (protected area, MB-6)
+card_status:
+  status: decided
+  decision: PR #37, maintainer review of the method cards, 2026-11-14
+determinism: false
+verification:
+  method: The maintainer decides every question and reviews and merges every pull request; the cold-start test checks the handoff to a fresh session.
+  verifiers:
+    - maintainer
+    - cold-start-test
+errors_and_limits:
+  error_outputs:
+    - to: maintainer
+      artifact: report
+      postconditions: A context warning, sent once at each threshold.
+    - to: companion
+      artifact: companion-handoff
+      postconditions: Written at the test threshold and again at the change threshold.
+  budget:
+    cost:
+      amount: 300000
+      unit: context tokens
+  escalation: >-
+    Two context thresholds. Test, near 200000 context tokens: warn the maintainer,
+    write the handoff and run the cold-start test on it. Change, near 300000 context
+    tokens: warn the maintainer, write the final handoff and stop; a fresh session
+    continues from it. Beyond its own rules, the maintainer decides.
+contract_version: "1.0"
+controls:
+  - agents-rules
+executor_and_permissions:
+  executor: An AI agent session, started by the maintainer.
+  capabilities:
+    - start executor and reviewer agents, each in its own worktree
+    - write issues and comments in the tracker, and close a ticket after the maintainer merges its pull request
+    - remove the worktrees of merged work and pull main
+  context: The prompt companion (prompts/companion.md) and the module IDs it lists.
+transformation:
+  description: Turns the tracker's state and the maintainer's decisions into tickets, agent prompts, questions and reports.
+  side_effects:
+    - Agents started and worktrees created and removed on the maintainer's machine.
+state:
+  reads:
+    - tracker
+  writes:
+    - tracker
+measures:
+  - name: cold-start-score
+    description: Items passed in the latest cold-start test.
+    unit: items out of 8
+zoom: null

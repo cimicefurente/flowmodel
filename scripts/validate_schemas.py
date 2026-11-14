@@ -1,6 +1,6 @@
-"""Check the standard's card schemas and their fixtures.
+"""Check the standard's card schemas and their fixtures, and optionally cards.
 
-Usage: validate_schemas.py <schemas folder>
+Usage: validate_schemas.py <schemas folder> [<card file> ...]
 
 Development tooling; its pinned dependencies are in requirements-schemas.txt.
 
@@ -25,6 +25,9 @@ declares no location.
 The check fails if a schema is not valid against the 2020-12 metaschema,
 if a kind lacks valid or invalid fixtures, if a valid fixture fails its
 schema, or if an invalid fixture passes it or fails somewhere else.
+
+Each card file given after the folder (e.g. this repo's own `method/*.yaml`)
+must be valid against the schema of the kind it declares (`kind: node`).
 
 YAML is read with the YAML 1.2 core schema the standard requires (`PA-5`):
 implicit types are only null (`~`, `null`, empty), booleans (`true`,
@@ -194,8 +197,8 @@ def check_fixtures(folder: Path, kinds: set[str], libraries: set[str]) -> list[s
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) != 2:
-        print("usage: validate_schemas.py <schemas folder>", file=sys.stderr)
+    if len(argv) < 2:
+        print("usage: validate_schemas.py <schemas folder> [<card file> ...]", file=sys.stderr)
         return 2
     folder = Path(argv[1])
     failures: list[str] = self_test()
@@ -274,12 +277,30 @@ def main(argv: list[str]) -> int:
                     for error in errors:
                         print(f"              at {pointer(error.absolute_path)}: {error.message}")
 
+    for path in map(Path, argv[2:]):
+        try:
+            card = load_yaml(path.read_text(encoding="utf-8"))
+        except (OSError, yaml.YAMLError) as error:
+            failures.append(f"{path}: not readable YAML: {error}")
+            continue
+        kind = card.get("kind") if isinstance(card, dict) else None
+        if not isinstance(kind, str) or kind not in kinds & set(schemas):
+            failures.append(f"{path}: no schema for kind {kind!r}")
+            continue
+        validator = Draft202012Validator(schemas[kind], registry=registry)
+        errors = [best_match([error]) for error in validator.iter_errors(card)]
+        for error in errors:
+            failures.append(f"{path}: at {pointer(error.absolute_path)}: {error.message}")
+        if not errors:
+            print(f"card    pass  {path}")
+
     if failures:
         print(f"\n{len(failures)} problem(s):", file=sys.stderr)
         for failure in failures:
             print(f"  {failure}", file=sys.stderr)
         return 1
-    print("\nall schemas valid; every valid fixture passes and every invalid fixture fails where it declares")
+    print("\nall schemas valid; every valid fixture passes and every invalid fixture fails where it declares;"
+          " every card given passes its kind's schema")
     return 0
 
 
