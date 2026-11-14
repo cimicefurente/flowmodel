@@ -6,6 +6,7 @@ One schema to describe a software product and the method that builds it, and an 
 | --- | --- |
 | [`standard/`](standard/README.md) | The model: modules `MM`, `P`, `T`, `MB`, `PA`. Start here. |
 | [`prompts/`](prompts/) | System prompts for each role (`PA-4`) |
+| [`method/`](method/) | This repo's own method cards (ADR-0005), e.g. the companion |
 | [`engine/`](engine/README.md) | The reference engine (`MB-5`). Not written yet |
 | [`docs/adr/`](docs/adr/) | Decisions about this repo |
 
