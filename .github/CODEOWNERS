@@ -2,6 +2,7 @@
 # Agents never edit this file.
 /standard/      @cimicefurente
 /prompts/       @cimicefurente
+/method/        @cimicefurente
 /docs/adr/      @cimicefurente
 /engine/docs/adr/ @cimicefurente
 /AGENTS.md      @cimicefurente
