@@ -65,7 +65,7 @@ Views are Mermaid diagrams derived from the cards. Illustrations of the model it
 Pinning (`P15`, `CC-19`):
 
 - The standard has one semantic version for its modules, templates and schemas, released as the git tag `standard/vX.Y.Z`.
-- Each project has one lock file (`kind: lock`), valid against its schema in `schemas/`. It records the standard version, the adopted templates by ID (their version is the standard's), the engine version with its checksum and the version of each tool of the toolkit.
+- Each project has one lock file (`kind: lock`), valid against its schema in `schemas/`. It records the standard version, the adopted templates by ID (their version is the standard's), the engine version with the checksum of its release's checksums file (which lists the checksum of each platform's executable) and the version of each tool of the toolkit.
 - The lock file holds identifiers and exact versions only. An exact version is a full semantic version `MAJOR.MINOR.PATCH`, optionally with a pre-release or build part, or, for a tool, a full 40-character commit hash.
 - The lock file never holds a path, a repo, a URL, a range, a partial version or a moving name such as `latest` or `SNAPSHOT`.
 - A lock pins exact versions; compatible ranges, if ever needed, are declared in cards or templates, never in the lock (`P15`).

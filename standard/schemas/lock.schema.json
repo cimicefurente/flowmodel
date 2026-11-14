@@ -28,7 +28,7 @@
           "$ref": "#/$defs/semver"
         },
         "checksum": {
-          "description": "The checksum of the engine executable.",
+          "description": "The checksum of the engine release's checksums file, which lists the checksum of each platform's executable.",
           "type": "string",
           "pattern": "^sha256:[0-9a-f]{64}$"
         }
