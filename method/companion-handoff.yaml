@@ -1,0 +1,29 @@
+# What one companion session passes to the next. Only what the tracker cannot hold (P1).
+kind: artifact
+id: companion-handoff
+name: Companion handoff
+owner: The maintainer (protected area, MB-6)
+card_status:
+  status: hypothesis
+type: Document
+schema: >-
+  Plain text in three parts. 1. Written: date and time, and the commit of main
+  it was written on. 2. Running executors: for each, the ticket number, the
+  agent's ID, its worktree, its branch and what it is doing or waiting for.
+  3. Local worktrees: for each, its path, its branch, the ticket or pull request
+  number, and whether it can be removed. Everything else (decisions, open
+  questions, ticket and pull request states, next steps) is not written here but
+  cited by issue or pull request number.
+source_of_truth: >-
+  The handoff text the outgoing session writes as its last message to the
+  maintainer, who gives it to the incoming session as its first input.
+created_by:
+  - companion
+changed_by:
+  - companion
+life_cycle:
+  - written
+  - read by the next session
+  - superseded by the next handoff
+versioning: Parts are only added; a removed or renamed part is a new contract version of the companion (N13).
+sensitivity: []

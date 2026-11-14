@@ -20,4 +20,4 @@ jobs:
       - name: Install the pinned validator
         run: python -m pip install -r scripts/requirements-schemas.txt
       - name: Validate
-        run: python scripts/validate_schemas.py standard/schemas
+        run: python scripts/validate_schemas.py standard/schemas method/*.yaml
