@@ -16,7 +16,7 @@ They hold for product and method alike.
 | P10 | Every flow has at least one measure; only what is measured can be improved | Improvement |
 | P11 | Every boundary crossing goes through an explicit contract; no node skips a layer | Security, malleability |
 | P12 | Identity and permissions are checked at the trust boundary, on the side you control; never only on the caller's side | Security |
-| P13 | Every state has exactly one owner that writes it; the others go through the owner | Robustness, scalability |
+| P13 | Every state has exactly one state owner, accountable for it; more than one writer is allowed only with a declared concurrency rule | Robustness, scalability |
 | P14 | What you do not control (external nodes) has a contract, a maximum wait time and a fallback | Reliability |
 | P15 | Every dependency on a shared component (this standard, a template, the engine, a tool) goes through a stable identifier and a pinned version recorded in one lock file; never through a location such as a repo, a path or a file URL | Malleability, evolution |
 

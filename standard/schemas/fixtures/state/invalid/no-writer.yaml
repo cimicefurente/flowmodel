@@ -1,4 +1,4 @@
-# Every state has an owner that writes it (P13).
+# Every state has at least one writer (MM-5).
 # expect: /writers
 kind: state
 id: orders-database
@@ -6,6 +6,7 @@ owner: Product team
 card_status:
   status: hypothesis
 content: Orders and their lines.
+state_owner: orders-service
 writers: []
 readers:
   - reporting

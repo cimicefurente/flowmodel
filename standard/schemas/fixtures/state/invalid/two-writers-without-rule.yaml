@@ -6,6 +6,7 @@ owner: Product team
 card_status:
   status: hypothesis
 content: Orders and their lines.
+state_owner: orders-service
 writers:
   - orders-service
   - migration-job
