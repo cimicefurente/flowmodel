@@ -16,6 +16,10 @@ Which skill carries out each step:
 | 8. Integration | — (mechanical gate) |
 | 9. Retrospective | `/retro` |
 
+Triage of incoming tickets: `/triage`.
+
+Installed with the skills above (table and `/triage`): `/setup-matt-pocock-skills` and the skills these call.
+
 Rules when adopting it:
 
 - The skills are pinned to one version (`P15`) and copied into the project with their own installer, so every executor runs the same version.
