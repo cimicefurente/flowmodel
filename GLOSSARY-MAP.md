@@ -7,5 +7,5 @@
 
 ## Relationships
 
-- **Standard → Engine**: the engine reads the standard only through the card schemas (ADR-0001); engine entries cite standard terms by ID and never redefine them (`P1`)
+- **Standard → Engine**: the engine reads the standard only through the card schemas and the sub-module files it embeds from a released tag (ADR-0010); engine entries cite standard terms by ID and never redefine them (`P1`)
 - **Standard ↔ Engine**: shared terms (engine, controller, executor, decision point) are defined only in the standard; the engine glossary adds only what the engine adds to them

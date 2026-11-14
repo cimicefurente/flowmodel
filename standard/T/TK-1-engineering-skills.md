@@ -1,3 +1,11 @@
+---
+id: TK-1
+name: Engineering skills for coding agents
+module: T
+owner: The maintainer (protected area, MB-6)
+status: decided
+---
+
 # TK-1 Engineering skills for coding agents
 
 When to use it: the method's agents are coding agents that support skills (slash commands loaded from `SKILL.md` files), and the project wants a ready-made set of skills for the judgement steps of `MB-2`.
