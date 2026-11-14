@@ -1,3 +1,11 @@
+---
+id: TA-1
+name: Multi-user client-server application
+module: T
+owner: The maintainer (protected area, MB-6)
+status: decided
+---
+
 # TA-1 Multi-user client-server application
 
 When to use it: several users, shared data, access from a browser or an app, different permissions per role.

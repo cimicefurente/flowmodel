@@ -1,6 +1,10 @@
-# P. Principles
-
-They hold for product and method alike.
+---
+id: P
+name: Principles
+module: P
+owner: The maintainer (protected area, MB-6)
+status: decided
+---
 
 | ID | Principle | Serves |
 | --- | --- | --- |
